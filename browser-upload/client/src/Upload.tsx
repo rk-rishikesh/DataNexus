@@ -56,55 +56,65 @@ function Upload() {
           <>
             <p>Upload Content to IPFS</p>
             <div className="flex gap-32">
-              <div className="">
-                <div
-                  className="button-con button-53"
-                  onClick={handleSelectFile}
-                >
-                  Select CAR
-                  <input
-                    id="file"
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleFileChange}
-                    className="w-full h-full"
-                    style={{ display: "none" }}
-                  />
-                </div>
-                <div className="flex-1 flex items-center pl-4 text-sm -rotate-2">
-                  {file ? file?.name : ""}
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <div
-                  className="button-con button-53 h-12"
-                  onClick={handleUpload}
-                >
-                  Upload
-                </div>
-                {uploadLink && (
-                  <a
-                    className="text-sm mt-4 -rotate-2"
-                    href={uploadLink}
-                    target="__blank"
+              <>
+                <div className="">
+                  <div
+                    className="button-con button-53"
+                    onClick={handleSelectFile}
                   >
-                    {uploadLink}
-                  </a>
-                )}
-                {dynamicLink && (
-                  <a
-                    className="text-sm mt-4 -rotate-2"
-                    href={`https://${dynamicLink}`}
-                    target="__blank"
+                    Select
+                    <input
+                      id="file"
+                      type="file"
+                      ref={fileInputRef}
+                      onChange={handleFileChange}
+                      className="w-full h-full"
+                      style={{ display: "none" }}
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <div
+                    className="button-con button-53 h-12"
+                    onClick={handleUpload}
                   >
-                    {dynamicLink}
-                  </a>
-                )}
-              </div>
+                    Upload
+                  </div>
+
+                </div>
+              </>
+
+
             </div>
           </>
         )}
       </header>
+      <div>
+          <div>
+          {uploadLink && (
+          <a
+            className="box"
+            href={uploadLink}
+            target="__blank"
+            
+          >
+            {uploadLink}
+          </a>
+        )}
+          </div>
+        <div style={{marginTop:"5%"}}>
+        {dynamicLink && (
+          <a
+            className="box"
+            href={`https://${dynamicLink}`}
+            target="__blank"
+          >
+            ⚡️ {dynamicLink}
+          </a>
+        )}
+        </div>
+        
+      </div>
     </div>
   );
 }
