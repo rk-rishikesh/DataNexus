@@ -155,7 +155,7 @@ export default function App() {
 
   const dealIDHandler = async () => {
     setDealID("Waiting for acceptance by SP...");
-    console.log(pieceCID)
+    console.log(pieceCID);
     cid = new CID(pieceCID);
     var refresh = setInterval(async () => {
       console.log(cid.bytes);
@@ -298,17 +298,19 @@ export default function App() {
                 Create Deal
               </a>
             </label>
-            
-            
           </div>
         </>
       )}
       {three ? (
-        <div>
-          <div className="mw6 center mt4">
+        <div className="mw6 center mt4">
+          <div className="mw4 center mt4">
             <img src={logo} className="App-logo" alt="logo" />
           </div>
-          <label className="tc db mh2 mh0-ns pv3 link pointer glow o-90 bg-blue white relative br1">
+          <div className="center mt4">
+            <a className="boxx">{txSubmitted} </a>
+          </div>
+          <div className="mw6 center mt4">
+            <label className="tc db mh2 mh0-ns pv3 link pointer glow o-90 bg-blue white relative br1">
               <a
                 onClick={() => {
                   dealIDHandler();
@@ -317,6 +319,10 @@ export default function App() {
                 Get Deal ID
               </a>
             </label>
+            <div className="center mt4">
+              <a className="boxx">{dealID} </a>
+            </div>
+          </div>
         </div>
       ) : null}
     </div>

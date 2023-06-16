@@ -196,6 +196,24 @@
   text-decoration: underline;
 }
 
+.boxx {
+  height: 100px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+/* Styling the link */
+.boxx a {
+  color: #333;
+  text-decoration: none;
+}
+
+.boxx a:hover {
+  text-decoration: underline;
+}
+
 @keyframes splash {
   0% {
     transform: scale(0.75);
