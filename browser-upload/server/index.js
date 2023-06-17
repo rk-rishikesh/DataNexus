@@ -13,7 +13,7 @@ app.use(cors());
 
 app.get("/initiate-upload", async (req, res, next) => {
   try {
-    const bucketName = "example-browser-upload";
+    const bucketName = "data-nexus";
     const protocol = ProtocolEnum.IPFS;
 
     const client = new SpheronClient({

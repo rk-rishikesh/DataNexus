@@ -28,7 +28,7 @@ export default function App() {
   const [three, setThree] = useState(false); // contract interaction
   const [carLink, setCarLink] = useState("");
   const [errorMessageSubmit, setErrorMessageSubmit] = useState("");
-  const [txSubmitted, setTxSubmitted] = useState("");
+  const [txSubmitted, setTxSubmitted] = useState(false);
   const [dealID, setDealID] = useState("");
   const [proposingDeal, setProposingDeal] = useState(false);
 
@@ -134,7 +134,7 @@ export default function App() {
         const receipt = await transaction.wait();
         console.log(receipt);
         setProposingDeal(false);
-        setTxSubmitted("Transaction submitted! " + receipt.hash);
+        setTxSubmitted(true);
 
         dealClient.on("DealProposalCreate", (id, size, verified, price) => {
           console.log(id, size, verified, price);
@@ -154,7 +154,7 @@ export default function App() {
   };
 
   const dealIDHandler = async () => {
-    setDealID("Waiting for acceptance by SP...");
+    setDealID("Waiting");
     console.log(pieceCID);
     cid = new CID(pieceCID);
     var refresh = setInterval(async () => {
@@ -303,26 +303,57 @@ export default function App() {
       )}
       {three ? (
         <div className="mw6 center mt4">
-          <div className="mw4 center mt4">
-            <img src={logo} className="App-logo" alt="logo" />
-          </div>
-          <div className="center mt4">
-            <a className="boxx">{txSubmitted} </a>
-          </div>
-          <div className="mw6 center mt4">
-            <label className="tc db mh2 mh0-ns pv3 link pointer glow o-90 bg-blue white relative br1">
-              <a
-                onClick={() => {
-                  dealIDHandler();
-                }}
-              >
-                Get Deal ID
-              </a>
-            </label>
-            <div className="center mt4">
-              <a className="boxx">{dealID} </a>
-            </div>
-          </div>
+          {!txSubmitted && (
+            <>
+              <div className="mw4 center mt8">
+                <img src={logo} className="App-logo" alt="logo" />
+              </div>
+              <div className="mw5 center mt8">
+                <span>C R E A T I N G </span>&nbsp;&nbsp;&nbsp; D A T A
+                &nbsp;&nbsp;&nbsp;<span>D E A L</span>
+              </div>
+            </>
+          )}
+
+          {txSubmitted && (
+            <>
+              <div className="tc center mt8" style={{ marginTop: "30%" }}>
+                <img
+                  className="tc center mt8"
+                  src="https://www.lappymaker.com/images/greentick-unscreen.gif"
+                />
+                Transaction Successful
+              </div>
+              <div className="mw6 center mt4">
+                <label className="tc db mh2 mh0-ns pv3 link pointer glow o-90 bg-blue white relative br1">
+                  <a
+                    onClick={() => {
+                      dealIDHandler();
+                    }}
+                  >
+                    Get Deal ID
+                  </a>
+                </label>
+                {dealID != "" && (
+                  <div className="tc center mt4">
+                    {dealID == "Waiting" && (
+                      <a>
+                        <span>W A I T I N G </span>&nbsp;&nbsp;&nbsp; F O R
+                        &nbsp;&nbsp;&nbsp;<span> A C C E P T A N C E</span>{" "}
+                        &nbsp;&nbsp;&nbsp;<span> B Y</span>&nbsp;&nbsp;&nbsp;
+                        <span> S P</span>
+                      </a>
+                    )}
+                      {dealID != "Waiting" && (
+                      <a className="boxx">
+                        {dealID}
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
+            </>
+          )}
         </div>
       ) : null}
     </div>
